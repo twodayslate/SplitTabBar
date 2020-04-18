@@ -9,8 +9,12 @@ class SplitTabBarViewController: UISplitViewController {
     
     var hideTabBar: Bool = true
     
-    init(viewControllers: [UIViewController]) {
+    init(viewControllers: [UIViewController]? = nil) {
         super.init(nibName: nil, bundle: nil)
+        self.setViewControllers(viewControllers)
+    }
+    
+    public func setViewControllers(_ viewControllers: [UIViewController]?) {
         self.detailTabBar.viewControllers = viewControllers
     }
     

@@ -31,9 +31,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
            
         
         
-            let split = SplitTabBarViewController(viewControllers: [NumberedNavigationController(0), NumberedNavigationController(1)])
-        
-        split.hideTabBar = false
+            let split = SplitTabBarViewController()
+        split.setViewControllers([NumberedNavigationController(0), NumberedNavigationController(1)])
         
         
         
