@@ -1,15 +1,15 @@
 import UIKit
 
 open class SplitTabBarViewController: UISplitViewController {
-    let masterNavigation = SplitTabBarMasterNavigationController()
-    let detailTabBar = SplitTabBarDetailController()
+    public let masterNavigation = SplitTabBarMasterNavigationController()
+    public let detailTabBar = SplitTabBarDetailController()
     
-    var compactPreferredDisplayMode = UISplitViewController.DisplayMode.primaryHidden
-    var regularPreferredDisplayMode = UISplitViewController.DisplayMode.automatic
+    public var compactPreferredDisplayMode = UISplitViewController.DisplayMode.primaryHidden
+    public var regularPreferredDisplayMode = UISplitViewController.DisplayMode.automatic
     
-    var hideTabBar: Bool = true
+    public var hideTabBar: Bool = true
     
-    init(viewControllers: [UIViewController]? = nil) {
+    public init(viewControllers: [UIViewController]? = nil) {
         super.init(nibName: nil, bundle: nil)
         self.setViewControllers(viewControllers)
     }
