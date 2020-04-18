@@ -8,16 +8,47 @@
 
 import UIKit
 
+@available(iOS 13.0, *)
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-
+    @objc func addVC(_ sender: Any?) {
+        guard let index = (self.window?.rootViewController as? SplitTabBarViewController)?.detailTabBar.viewControllers?.count else {
+            return
+        }
+        (self.window?.rootViewController as? SplitTabBarViewController)?.detailTabBar.viewControllers?.append(NumberedNavigationController(index))
+    }
+    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let _ = (scene as? UIWindowScene) else { return }
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        
+            let window = UIWindow(windowScene: windowScene)
+        
+           
+        
+        
+            let split = SplitTabBarViewController(viewControllers: [NumberedNavigationController(0), NumberedNavigationController(1)])
+        
+        split.hideTabBar = false
+        
+        
+        
+        split.masterNavigation.navigation.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addVC(_:)))
+                
+            window.rootViewController = split
+        
+        
+        
+            self.window = window
+            
+        self.window?.backgroundColor = .systemBackground
+            
+        self.window?.makeKeyAndVisible()
+
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
