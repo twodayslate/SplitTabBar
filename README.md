@@ -1,6 +1,6 @@
 # SplitTabBar
 
-A UISplitViewController combined with a UITabBarController
+A `UISplitViewController` combined with a `UITabBarController` in sync
 
 <p align="center">
 <img src="https://raw.githubusercontent.com/twodayslate/SplitTabBar/master/Example/macos.png" width="50%" alt="macOS Screenshot"/><img src="https://raw.githubusercontent.com/twodayslate/SplitTabBar/master/Example/iPad.png" width="50%" alt="iPad Screenshot"/>

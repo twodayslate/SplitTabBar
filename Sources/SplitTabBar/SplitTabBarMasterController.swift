@@ -1,21 +1,21 @@
 import UIKit
 
-class SplitTabBarMasterController: UITableViewController {
+open class SplitTabBarMasterController: UITableViewController {
     
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Navigation"
     }
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    override public func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return (self.splitViewController as? SplitTabBarViewController)?.detailTabBar.viewControllers?.count ?? 0
     }
         
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
         cell.textLabel?.text = (self.splitViewController as?
             SplitTabBarViewController)?.detailTabBar.viewControllers?[indexPath.row].title
@@ -37,17 +37,17 @@ class SplitTabBarMasterController: UITableViewController {
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    override public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         (self.splitViewController as? SplitTabBarViewController)?.detailTabBar.selectedIndex = indexPath.row
         
         tableView.cellForRow(at: indexPath)?.imageView?.image = (self.splitViewController as? SplitTabBarViewController)?.detailTabBar.viewControllers?[indexPath.row].tabBarItem.selectedImage
     }
     
-    override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+    override public func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         tableView.cellForRow(at: indexPath)?.imageView?.image = (self.splitViewController as? SplitTabBarViewController)?.detailTabBar.viewControllers?[indexPath.row].tabBarItem.image
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    override public func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         guard let index = (self.splitViewController as? SplitTabBarViewController)?.detailTabBar.selectedViewControllerIndex else { return }

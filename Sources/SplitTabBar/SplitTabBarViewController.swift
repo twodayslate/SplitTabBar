@@ -1,6 +1,6 @@
 import UIKit
 
-class SplitTabBarViewController: UISplitViewController {
+open class SplitTabBarViewController: UISplitViewController {
     let masterNavigation = SplitTabBarMasterNavigationController()
     let detailTabBar = SplitTabBarDetailController()
     
@@ -18,11 +18,11 @@ class SplitTabBarViewController: UISplitViewController {
         self.detailTabBar.viewControllers = viewControllers
     }
     
-    required init?(coder: NSCoder) {
+    required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
         
         self.latestTraitCollection = self.traitCollection
@@ -41,17 +41,18 @@ class SplitTabBarViewController: UISplitViewController {
     
     var latestTraitCollection: UITraitCollection?
     
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+    open override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         self.latestTraitCollection = self.traitCollection
+        self.setSplitTabs()
     }
     
-    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+    open override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
         self.latestTraitCollection = newCollection
         super.willTransition(to: newCollection, with: coordinator)
     }
     
-    func setSplitTabs() {
+    open func setSplitTabs() {
         if self.traitCollection.horizontalSizeClass == .compact {
             self.preferredDisplayMode = self.compactPreferredDisplayMode
             if self.hideTabBar {
@@ -69,24 +70,25 @@ class SplitTabBarViewController: UISplitViewController {
         self.setSplitTabs()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    open override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         setSplitTabs()
     }
 }
 
 extension SplitTabBarViewController: UISplitViewControllerDelegate {
-    func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController: UIViewController, onto primaryViewController: UIViewController) -> Bool {
+    public func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController: UIViewController, onto primaryViewController: UIViewController) -> Bool {
         return true
     }
 
-    func primaryViewController(forCollapsing splitViewController: UISplitViewController) -> UIViewController? {
+    public func primaryViewController(forCollapsing splitViewController: UISplitViewController) -> UIViewController? {
         if self.latestTraitCollection?.horizontalSizeClass == .compact {
             return detailTabBar
         }
         return masterNavigation
     }
     
-    func primaryViewController(forExpanding splitViewController: UISplitViewController) -> UIViewController? {
+    public func primaryViewController(forExpanding splitViewController: UISplitViewController) -> UIViewController? {
         if self.latestTraitCollection?.horizontalSizeClass == .compact {
             return detailTabBar
         }

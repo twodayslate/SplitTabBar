@@ -1,34 +1,34 @@
 import UIKit
 
-class SplitTabBarDetailController: UITabBarController {
+open class SplitTabBarDetailController: UITabBarController {
 
-    override func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
         
         self.delegate = self
     }
     
-    var selectedViewControllerIndex: Int {
+    open var selectedViewControllerIndex: Int {
         guard let selectedVC = self.selectedViewController else {
             return -1
         }
-        
+
         return self.viewControllers?.firstIndex(of: selectedVC) ?? -1
     }
 
-    override func tabBar(_ tabBar: UITabBar, didEndCustomizing items: [UITabBarItem], changed: Bool) {
+    public override func tabBar(_ tabBar: UITabBar, didEndCustomizing items: [UITabBarItem], changed: Bool) {
         super.tabBar(tabBar, willEndCustomizing: items, changed: changed)
         (self.splitViewController as? SplitTabBarViewController)?.masterNavigation.navigation.tableView.reloadSections(IndexSet(integer: 0), with: .none)
     }
     
-    override var viewControllers: [UIViewController]? {
+    open override var viewControllers: [UIViewController]? {
         didSet {
             
             (self.splitViewController as? SplitTabBarViewController)?.masterNavigation.navigation.tableView.reloadData()
         }
     }
     
-    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+    open override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         (self.splitViewController as? SplitTabBarViewController)?.masterNavigation.navigation.tableView.reloadSections(IndexSet(integer: 0), with: .none)
     }
     
@@ -36,7 +36,7 @@ class SplitTabBarDetailController: UITabBarController {
 }
 
 extension SplitTabBarDetailController: UITabBarControllerDelegate {
-    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+    public func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
         // https://stackoverflow.com/a/52181877/193772
         if viewController == self.moreNavigationController, let moreTableView = tabBarController.moreNavigationController.topViewController?.view as? UITableView {
             if originalMoreTableViewDelegate == nil {
@@ -52,7 +52,7 @@ extension SplitTabBarDetailController: UITabBarControllerDelegate {
 
 extension SplitTabBarDetailController: UITableViewDelegate {
     // https://stackoverflow.com/a/52181877/193772
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         originalMoreTableViewDelegate?.tableView?(tableView, didSelectRowAt: indexPath)
         
         (self.splitViewController as? SplitTabBarViewController)?.masterNavigation.navigation.tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
