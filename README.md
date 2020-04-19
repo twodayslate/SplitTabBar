@@ -23,7 +23,7 @@ splitTabBar.detailTabBar.viewControllers = [/*your new view controllers */]
 
 If you want the `UITabBarController` tabs to always be present you can enable them via
 ```swift
-splitTabBar.hideTabBar = false
+splitTabBar.shouldHideTabBar = false
 ```
 You can see an example of showing both the `UISplitViewController` navigation and the `UITabBarController` tabs in the [macOS screenshots above](https://raw.githubusercontent.com/twodayslate/SplitTabBar/master/Example/macos.png).
 

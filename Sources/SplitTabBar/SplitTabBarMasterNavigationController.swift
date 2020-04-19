@@ -6,7 +6,7 @@ open class SplitTabBarMasterNavigationController: UINavigationController {
         self.navigation = SplitTabBarMasterController()
         super.init(rootViewController: self.navigation)
     }
-    
+
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
