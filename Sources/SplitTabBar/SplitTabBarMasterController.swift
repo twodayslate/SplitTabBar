@@ -2,16 +2,16 @@ import UIKit
 
 open class SplitTabBarMasterController: UITableViewController {
 
-    override public func viewDidLoad() {
+    override open func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Navigation"
     }
 
-    override public func numberOfSections(in tableView: UITableView) -> Int {
+    override open func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    override public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int)
+    override open func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int)
         -> Int
     {
         return
@@ -19,7 +19,7 @@ open class SplitTabBarMasterController: UITableViewController {
             .count ?? 0
     }
 
-    override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath)
+    override open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath)
         -> UITableViewCell
     {
         let cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
@@ -52,7 +52,7 @@ open class SplitTabBarMasterController: UITableViewController {
         return cell
     }
 
-    override public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    override open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         (self.splitViewController as? SplitTabBarViewController)?.detailTabBar.selectedIndex =
             indexPath.row
 
@@ -62,7 +62,7 @@ open class SplitTabBarMasterController: UITableViewController {
             ].tabBarItem.selectedImage?.withRenderingMode(.alwaysTemplate)
     }
 
-    override public func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath)
+    override open func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath)
     {
         tableView.cellForRow(at: indexPath)?.imageView?.image =
             (self.splitViewController as? SplitTabBarViewController)?.detailTabBar.viewControllers?[
@@ -70,7 +70,7 @@ open class SplitTabBarMasterController: UITableViewController {
             ].tabBarItem.image?.withRenderingMode(.alwaysTemplate)
     }
 
-    override public func viewDidAppear(_ animated: Bool) {
+    override open func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
         guard

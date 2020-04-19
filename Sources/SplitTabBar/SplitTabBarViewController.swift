@@ -32,12 +32,12 @@ open class SplitTabBarViewController: UISplitViewController {
         self.setViewControllers(viewControllers)
     }
 
-    public func setViewControllers(_ viewControllers: [UIViewController]?) {
-        self.detailTabBar.viewControllers = viewControllers
-    }
-
     required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    open func setViewControllers(_ viewControllers: [UIViewController]?) {
+        self.detailTabBar.viewControllers = viewControllers
     }
 
     open override func viewDidLoad() {
@@ -48,7 +48,7 @@ open class SplitTabBarViewController: UISplitViewController {
         NotificationCenter.default.addObserver(
             self, selector: #selector(deviceOrientationDidChangeNotification),
             name: UIDevice.orientationDidChangeNotification, object: nil)
-
+        
         self.delegate = self
 
         self.viewControllers = [masterNavigation, detailTabBar]
@@ -59,7 +59,7 @@ open class SplitTabBarViewController: UISplitViewController {
         // Do any additional setup after loading the view.
     }
 
-    var latestTraitCollection: UITraitCollection?
+    public private(set) var latestTraitCollection: UITraitCollection?
 
     open override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
@@ -99,7 +99,7 @@ open class SplitTabBarViewController: UISplitViewController {
 }
 
 extension SplitTabBarViewController: UISplitViewControllerDelegate {
-    public func splitViewController(
+    open func splitViewController(
         _ splitViewController: UISplitViewController,
         collapseSecondary secondaryViewController: UIViewController,
         onto primaryViewController: UIViewController
@@ -107,7 +107,7 @@ extension SplitTabBarViewController: UISplitViewControllerDelegate {
         return true
     }
 
-    public func primaryViewController(forCollapsing splitViewController: UISplitViewController)
+    open func primaryViewController(forCollapsing splitViewController: UISplitViewController)
         -> UIViewController?
     {
         if self.latestTraitCollection?.horizontalSizeClass == .compact {
@@ -116,7 +116,7 @@ extension SplitTabBarViewController: UISplitViewControllerDelegate {
         return masterNavigation
     }
 
-    public func primaryViewController(forExpanding splitViewController: UISplitViewController)
+    open func primaryViewController(forExpanding splitViewController: UISplitViewController)
         -> UIViewController?
     {
         if self.latestTraitCollection?.horizontalSizeClass == .compact {
