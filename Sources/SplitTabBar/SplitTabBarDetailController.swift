@@ -16,6 +16,13 @@ open class SplitTabBarDetailController: UITabBarController {
         return self.viewControllers?.firstIndex(of: selectedVC) ?? -1
     }
 
+    override open var selectedViewController: UIViewController? {
+        didSet {
+            (self.splitViewController as? SplitTabBarViewController)?.masterNavigation.navigation
+                .tableView.reloadSections(IndexSet(integer: 0), with: .none)
+        }
+    }
+
     open override func tabBar(
         _ tabBar: UITabBar, didEndCustomizing items: [UITabBarItem], changed: Bool
     ) {
