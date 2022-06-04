@@ -16,6 +16,15 @@ open class SplitTabBarViewController: UISplitViewController {
         }
     }
 
+    @available(iOS 14.0, *)
+    public init(style: UISplitViewController.Style,
+        masterNavigation: SplitTabBarMasterNavigationController,
+                detailTabBar: SplitTabBarDetailController) {
+        self.masterNavigation = masterNavigation
+        self.detailTabBar = detailTabBar
+        super.init(style: style)
+    }
+    
     public init(
         masterNavigation: SplitTabBarMasterNavigationController,
         detailTabBar: SplitTabBarDetailController
@@ -30,6 +39,11 @@ open class SplitTabBarViewController: UISplitViewController {
             masterNavigation: SplitTabBarMasterNavigationController(),
             detailTabBar: SplitTabBarDetailController())
         self.setViewControllers(viewControllers)
+    }
+    
+    @available(iOS 14.0, *)
+    public convenience override init(style: UISplitViewController.Style) {
+        self.init(style: style, masterNavigation: SplitTabBarMasterNavigationController(), detailTabBar: SplitTabBarDetailController())
     }
 
     required public init?(coder: NSCoder) {
